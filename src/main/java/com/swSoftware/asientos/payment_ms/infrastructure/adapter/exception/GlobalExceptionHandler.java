@@ -3,6 +3,7 @@ package com.swSoftware.asientos.payment_ms.infrastructure.adapter.exception;
 
 import com.swSoftware.asientos.payment_ms.application.dto.responseApi.DtoErrorResponseApi;
 import com.swSoftware.asientos.payment_ms.application.exception.handler.ApplicationExceptionHandler;
+import com.swSoftware.asientos.payment_ms.infrastructure.adapter.exception.payment.ExceptionPaymentNotFound;
 import org.slf4j.MDC;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -33,11 +34,13 @@ public class GlobalExceptionHandler extends ApplicationExceptionHandler {
         return ResponseEntity.status(400).body(errors);
     }
 
+    @ExceptionHandler(ExceptionPaymentNotFound.class)
+    public ResponseEntity<DtoErrorResponseApi> ExceptionPaymentNotFound(ExceptionPaymentNotFound ex) {
+        return ResponseEntity.status(404).body(new DtoErrorResponseApi("PAYMENT_MODEL_NOT_FOUND", 404, getIdCorrelation()));
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<DtoErrorResponseApi> handleTechnical(Exception ex) {
         return ResponseEntity.status(500).body(new DtoErrorResponseApi("SERVER_ERROR", 500, getIdCorrelation()));
     }
-
-
-
 }

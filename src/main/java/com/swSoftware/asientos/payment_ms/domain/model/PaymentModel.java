@@ -1,0 +1,30 @@
+package com.swSoftware.asientos.payment_ms.domain.model;
+
+import com.swSoftware.asientos.payment_ms.domain.status.StatusPayment;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.time.Instant;
+import java.util.UUID;
+
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+@Builder
+@Table(name = "payment_table")
+public class PaymentModel {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
+    private UUID idUser;
+    private UUID idTicket;
+    private Instant dateLimitToPage;
+    @Enumerated(EnumType.STRING)
+    private StatusPayment status;
+    private Instant createAt;
+}
