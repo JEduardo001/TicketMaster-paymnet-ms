@@ -1,0 +1,78 @@
+{
+  "type": "record",
+  "name": "CreateTicketEvent",
+  "namespace": "com.app.events",
+  "fields": [
+    {
+      "name": "idCorrelation",
+      "type": {
+        "type": "string",
+        "logicalType": "uuid"
+      }
+    },
+     {
+      "name": "idTicket",
+      "type": {
+        "type": "string",
+        "logicalType": "uuid"
+      }
+    },
+     {
+      "name": "status",
+      "type": {
+        "type": "string"
+      }
+    },
+     {
+       "name": "createdAt",
+       "type": {
+         "type": "long",
+         "logicalType": "timestamp-millis"
+       }
+     },
+
+
+    {
+      "name": "seats",
+      "type": {
+        "type": "array",
+        "items": {
+          "type": "record",
+          "name": "SeatReservedDetail",
+          "fields": [
+            {
+              "name": "idSeat",
+              "type": {
+                "type": "string",
+                "logicalType": "uuid"
+              }
+            },
+            {
+              "name": "section",
+              "type": "string"
+            },
+            {
+              "name": "seatNumber",
+              "type": "int"
+            },
+            {
+              "name": "status",
+              "type": "string"
+            }
+
+
+          ]
+        }
+      }
+    },
+
+
+    {
+      "name": "idUser",
+      "type": {
+        "type": "string",
+        "logicalType": "uuid"
+      }
+    }
+  ]
+}
